@@ -1,0 +1,87 @@
+
+const PrayerTimes = document.getElementById("PrayerTimes")
+fetch(`http://ip-api.com/json/`)
+.then(res=>res.json())
+.then((res)=>{
+        console.log(res)
+        document.getElementById("country").innerHTML = res.country
+        document.getElementById("city").innerHTML = res.city
+        ///////////////////////////////
+        let today = new Date().toLocaleDateString()
+        let [month,day,year]=today.split("/")
+        today = `${day}-${month}-${year}`
+        
+        PrayerTimes.innerHTML=`        <div id="Fajr">
+            <h1>Fajr</h1>
+            <h1 id="FajrTime" class="salaTime">04:35</h1>
+        </div>
+        <div id="Sunrise">
+            <h1>Sunrise</h1>
+            <h1 id="SunriseTime" class="salaTime">04:35</h1>
+        </div>
+        <div id="Dhuhr">
+            <h1>Dhuhr</h1>
+            <h1 id="DhuhrTime" class="salaTime">04:35</h1>
+        </div>
+        <div id="Asr">
+            <h1>Asr</h1>
+            <h1 id="AsrTime" class="salaTime">04:35</h1>
+        </div>
+        <div id="Maghrib">
+            <h1>Maghrib</h1>
+            <h1 id="MaghribTime" class="salaTime">04:35</h1>
+        </div>
+        <div id="Isha">
+            <h1>Isha</h1>
+            <h1 id="IshaTime" class="salaTime">04:35</h1>
+        </div>
+        `
+        const FajrTime = document.getElementById("FajrTime")
+        const SunriseTime = document.getElementById("SunriseTime")
+        const DhuhrTime = document.getElementById("DhuhrTime")
+        const AsrTime = document.getElementById("AsrTime")
+        const MaghribTime = document.getElementById("MaghribTime")
+        const IshaTime = document.getElementById("IshaTime")
+
+        fetch(`https://api.aladhan.com/v1/timingsByCity/${today}?city=${res.city}&country=${res.country}`)
+        .then(salawat => salawat.json())
+        .then((salawat)=>{
+            let str = "hello"
+            str.startsWith
+            let {Fajr,Sunrise,Dhuhr,Asr,Maghrib,Isha} = salawat.data.timings
+            if(Fajr.startsWith("0")){
+                Fajr = Fajr.slice(1)
+            }
+            if(Sunrise.startsWith("0")){
+                Sunrise = Sunrise.slice(1)
+            }
+            FajrTime.innerHTML = Fajr
+            SunriseTime.innerHTML = Sunrise
+            DhuhrTime.innerHTML = Dhuhr
+            AsrTime.innerHTML = Asr
+            MaghribTime.innerHTML = Maghrib
+            IshaTime.innerHTML = Isha
+            console.log(salawat)
+        })
+        
+}).catch((err)=>{
+PrayerTimes.innerHTML = `<section><h1 style='margin:0;'>Something went wrong try again later</h1></section>
+`
+});
+
+
+
+function setTime(){
+    const time = document.getElementById("time")
+    const day = document.getElementById("day")
+    day.innerHTML = new Date().toLocaleDateString()
+    let getNowTime = new Date().toLocaleTimeString().slice(-11,-6)
+    let PMOrAM = new Date().toLocaleTimeString().slice(-3)
+    time.innerHTML = getNowTime + PMOrAM 
+}
+setTime()
+setInterval(()=>{
+    setTime()
+        
+     
+},60000)
