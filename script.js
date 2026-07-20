@@ -1,11 +1,21 @@
 
 const PrayerTimes = document.getElementById("PrayerTimes")
-fetch(`http://ip-api.com/json/`)
-.then(res=>res.json())
+
+new Promise((resolve,reject)=>{
+    navigator.geolocation.getCurrentPosition((pos)=>{
+        resolve(pos.coords)
+    })
+})
+
 .then((res)=>{
-        console.log(res)
-        document.getElementById("country").innerHTML = res.country
-        document.getElementById("city").innerHTML = res.city
+        let {latitude,longitude} = res
+        fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
+        .then(res => res.json())
+        .then((address)=>{
+            document.getElementById("country").innerHTML = address.address.country
+            document.getElementById("city").innerHTML = address.address.city
+        })
+        
         ///////////////////////////////
         let today = new Date().toLocaleDateString()
         let [month,day,year]=today.split("/")
@@ -42,8 +52,8 @@ fetch(`http://ip-api.com/json/`)
         const AsrTime = document.getElementById("AsrTime")
         const MaghribTime = document.getElementById("MaghribTime")
         const IshaTime = document.getElementById("IshaTime")
-
-        fetch(`https://api.aladhan.com/v1/timingsByCity/${today}?city=${res.city}&country=${res.country}`)
+        
+        fetch(`https://api.aladhan.com/v1/timings/${today}?latitude=${latitude}&longitude=${longitude}`)
         .then(salawat => salawat.json())
         .then((salawat)=>{
             let str = "hello"
