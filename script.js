@@ -4,7 +4,7 @@ const PrayerTimes = document.getElementById("PrayerTimes")
 new Promise((resolve,reject)=>{
     navigator.geolocation.getCurrentPosition((pos)=>{
         resolve(pos.coords)
-    })
+    },err=>reject(err))
 })
 
 .then((res)=>{
@@ -75,8 +75,17 @@ new Promise((resolve,reject)=>{
         })
         
 }).catch((err)=>{
-PrayerTimes.innerHTML = `<section><h1 style='margin:0;'>Something went wrong try again later</h1></section>
+PrayerTimes.innerHTML = `<section><h1 style='margin:0;'>Something went wrong try again</h1>
+</section>
+
 `
+let btn = document.createElement("button")
+btn.innerHTML="give Permission "
+btn.onclick =()=>{
+    navigator.geolocation.getCurrentPosition(pos=>{
+        location.reload()
+    })
+}
 });
 
 
