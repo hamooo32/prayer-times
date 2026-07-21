@@ -75,6 +75,19 @@ new Promise((resolve,reject)=>{
         })
         
 }).catch((err)=>{
+    switch(err.code){
+        case err.PERMISSON_DENIED:
+            alert (" denied permission")
+            break
+        case err.POSITION_UNAVAILABLE:
+            alert("position is unavailable ")
+            break
+        case err.TIMEOUT:
+            alert("timeout")
+            break
+        default:
+            alert("unknown error")
+    }
 PrayerTimes.innerHTML = `<section><h1 style='margin:0;'>Something went wrong try again</h1>
 </section>
 
