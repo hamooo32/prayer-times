@@ -4,6 +4,7 @@ const PrayerTimes = document.getElementById("PrayerTimes")
 new Promise((resolve,reject)=>{
     navigator.geolocation.getCurrentPosition((pos)=>{
         resolve(pos.coords)
+        alert("done")
     },err=>reject(err))
 })
 
