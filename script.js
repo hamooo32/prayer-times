@@ -60,8 +60,11 @@ new Promise((resolve,reject)=>{
                 'Access-Control-Allow-Origin': '*'
             }
         })
-        .then(salawat => salawat.json())
+        .then(salawat => {
+            console.log([...salawat.headers.entries()])
+            salawat.json()})
         .then((salawat)=>{
+            
             let str = "hello"
             str.startsWith
             let {Fajr,Sunrise,Dhuhr,Asr,Maghrib,Isha} = salawat.data.timings
