@@ -21,6 +21,9 @@ new Promise((resolve,reject)=>{
             document.getElementById("country").innerHTML = address.address.country
             document.getElementById("city").innerHTML = address.address.city
         })
+        .catch((err)=>{
+            alert("from openStreetMap:"+err)
+        })
         
         ///////////////////////////////
         let today = new Date().toLocaleDateString()
@@ -78,6 +81,9 @@ new Promise((resolve,reject)=>{
             MaghribTime.innerHTML = Maghrib
             IshaTime.innerHTML = Isha
             console.log(salawat)
+        })
+        .catch((err)=>{
+            alert("from aladan:"+err)
         })
         
 }).catch((err)=>{
