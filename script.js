@@ -54,7 +54,12 @@ new Promise((resolve,reject)=>{
         const MaghribTime = document.getElementById("MaghribTime")
         const IshaTime = document.getElementById("IshaTime")
         
-        fetch(`https://api.aladhan.com/v1/timings/${today}?latitude=${latitude}&longitude=${longitude}`)
+        fetch(`https://api.aladhan.com/v1/timings/${today}?latitude=${latitude}&longitude=${longitude}`,{
+            method:'GET',
+            headers:{
+                'Access-Control-Allow-Origin': '*'
+            }
+        })
         .then(salawat => salawat.json())
         .then((salawat)=>{
             let str = "hello"
