@@ -57,7 +57,7 @@ new Promise((resolve,reject)=>{
         fetch(`https://api.aladhan.com/v1/timings/${today}?latitude=${latitude}&longitude=${longitude}`)
         .then(salawat => {
             console.log([...salawat.headers.entries()])
-            alert('Fetching:', `https://api.aladhan.com/v1/timings/${today}?latitude=${latitude}&longitude=${longitude}`);
+            alert('Fetching:'+ `https://api.aladhan.com/v1/timings/${today}?latitude=${latitude}&longitude=${longitude}`);
             return salawat.json()})
         .then((salawat)=>{
             
