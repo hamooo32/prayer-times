@@ -55,10 +55,7 @@ new Promise((resolve,reject)=>{
         const IshaTime = document.getElementById("IshaTime")
         
         fetch(`https://api.aladhan.com/v1/timings/${today}?latitude=${latitude}&longitude=${longitude}`,{
-            method:'GET',
-            headers:{
-                'Access-Control-Allow-Origin': '*'
-            }
+            method:'GET'
         })
         .then(salawat => {
             console.log([...salawat.headers.entries()])
