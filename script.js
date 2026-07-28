@@ -1,3 +1,8 @@
+const options = {
+  enableHighAccuracy: true, // Forces Android/Samsung to return data
+  timeout: 10000,           // Prevents infinite hanging (10 seconds)
+  maximumAge: 0             // Forces fresh data instead of stale/broken cache
+};
 
 const PrayerTimes = document.getElementById("PrayerTimes")
 
@@ -5,7 +10,7 @@ new Promise((resolve,reject)=>{
     navigator.geolocation.getCurrentPosition((pos)=>{
         resolve(pos.coords)
         alert("done")
-    },err=>reject(err))
+    },err=>reject(err),options)
 })
 
 .then((res)=>{
