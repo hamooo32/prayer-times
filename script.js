@@ -9,7 +9,8 @@ const PrayerTimes = document.getElementById("PrayerTimes")
 new Promise((resolve,reject)=>{
     navigator.geolocation.getCurrentPosition((pos)=>{
         resolve(pos.coords)
-        alert("done")
+        let {latitude,longitude} = pos.coords
+        alert("done: "+latitude+" , "+longitude)
     },err=>reject(err),options)
 })
 
