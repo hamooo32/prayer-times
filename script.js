@@ -10,8 +10,7 @@ new Promise((resolve,reject)=>{
     navigator.geolocation.getCurrentPosition((pos)=>{
         resolve(pos.coords)
         let {latitude,longitude} = pos.coords
-        alert("done: "+latitude+" , "+longitude)
-    },err=>reject(err),options)
+    },err=>reject(err))
 })
 
 .then((res)=>{
