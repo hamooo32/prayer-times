@@ -16,7 +16,12 @@ new Promise((resolve,reject)=>{
 
 .then((res)=>{
         let {latitude,longitude} = res
-        
+        fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
+        .then(res => res.json())
+        .then((address)=>{
+            document.getElementById("country").innerHTML = address.address.country
+            document.getElementById("city").innerHTML = address.address.city
+        })
         ///////////////////////////////
         let today = new Date().toLocaleDateString()
         let [month,day,year]=today.split("/")
